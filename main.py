@@ -1,4 +1,5 @@
 import cipher
+import argparse
 
 def decode(text):
     print("Rot13:",cipher.rot13decode(text))
@@ -47,4 +48,23 @@ def main():
     elif mode == "decode":
         text = str(input("Enter your text to be decoded:\n"))
         decode(text)
-main()                   
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--terminal",action="store_true",help="Enable terminal mode.")
+parser.add_argument("--text",help="Text to be done operations.")
+parser.add_argument("--mode",help="Specify operation mode. (encode or decode)")
+args = parser.parse_args()
+if args.terminal and args.text and (args.mode == "encode" or "decode"):
+    if args.mode == "encode":
+        encode(args.text)
+    elif args.mode == "decode":
+        decode(args.text)
+    else:
+        print("Available mods are encode and decode.")
+elif args.terminal and args.mode and not args.text:
+    print("Specify a text!")
+elif args.terminal and not args.mode:
+    print("Enter a mode. Available mods are encode and decode.")
+else:
+    main()                        
+                      

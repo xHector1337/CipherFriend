@@ -1,6 +1,7 @@
 import codecs
 import base64
 import hashlib
+import urllib.parse
 def rot13(text):
     return codecs.encode(text,"rot13")
 def b64(text):
@@ -34,15 +35,15 @@ def a85(text):
         return "None"
     return base64.a85decode(text).decode('utf-8')
 def b64encode(text):
-    return base64.b64encode(text).decode('utf-8')
+    return base64.b64encode(text.encode()).decode('utf-8')
 def b32encode(text):
-    return base64.b32encode(text).decode('utf-8')
+    return base64.b32encode(text.encode()).decode('utf-8')
 def b16encode(text):
-    return base64.b16encode(text).decode('utf-8')
+    return base64.b16encode(text.encode()).decode('utf-8')
 def b85encode(text):
-    return base64.b85encode(text).decode('utf-8')
+    return base64.b85encode(text.encode()).decode('utf-8')
 def a85encode(text):
-    return base64.a85encode(text).decode('utf-8')
+    return base64.a85encode(text.encode()).decode('utf-8')
 def rot13decode(text):
     return codecs.decode(text,"rot13")
 def MorseCodeEncode(text):
@@ -231,7 +232,9 @@ def MorseCodeDecode(text):
         elif i == SingleQuotation:
             translatedText += "'"
         elif i == Equal:
-            translatedText += "="                                                                                                                                                                    
+            translatedText += "="
+    if len(translatedText) < 2:
+        return "None"                                                                                                                                                                            
     return translatedText
 
 def md5sum(text):
@@ -252,3 +255,11 @@ def sha512sum(text):
 def sha384sum(text):
     h = hashlib.sha384(text.encode())
     return h.hexdigest()   
+
+def urlEncode(text):
+    return urllib.parse.quote(text,safe="")
+def urlDecode(text):
+    return urllib.parse.unquote(text)
+def reverse(text):
+    return text[::-1]
+    

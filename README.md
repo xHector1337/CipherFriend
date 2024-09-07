@@ -1,3 +1,5 @@
+![Ekran görüntüsü 2024-09-07 170424](https://github.com/user-attachments/assets/a9b41c34-e660-4505-9107-81e2f7617920)
+
 Cipher Friend is an app that encodes/decodes the text you write in various encodings. It is written with built-in Python libraries.
 
 # Usage
